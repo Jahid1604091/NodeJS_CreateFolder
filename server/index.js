@@ -9,6 +9,7 @@ app.get('/',(req,res)=>{
 
 app.use(express.json());
 app.use('/api/folder',require('./api/create'))
+app.use('/api/folder',require('./api/read'))
 
 app.listen(PORT,()=>{
     console.log(`Server running on port ${PORT} in ${process.env.NODE_ENV} mode...`)
