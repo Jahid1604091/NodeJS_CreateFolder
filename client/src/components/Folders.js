@@ -1,19 +1,19 @@
+import axios from 'axios';
 import React from 'react'
 import styled from "styled-components"
 import { menuItems } from '../utils/menuItems';
 import MenuItems from './MenuItems';
-export default function Folders() {
+export default function Folders({folders,handleAdd,handleDelete}) {
+
 
   return (
     <>
-
-        <ul>
-          {menuItems.map((menu, index) => {
-            const depthLevel = 0;
-             return <MenuItems items={menu} key={index} depthLevel={depthLevel} />;
-          })}
-        </ul>
-
+      <ul>
+        {folders.map((menu, index) => {
+          const depthLevel = 0;
+          return <MenuItems handleAdd={handleAdd} handleDelete={handleDelete} items={menu} key={index} depthLevel={depthLevel} />;
+        })}
+      </ul>
     </>
   )
 }

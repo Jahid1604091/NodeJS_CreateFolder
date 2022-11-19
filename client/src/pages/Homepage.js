@@ -6,28 +6,33 @@ import Folders from '../components/Folders'
 const Homepage = () => {
     const [name, setName] = useState('');
     const [folders, setFolders] = useState([]);
+    const [stateChange, setStateChange] = useState(false);
 
-    const createFolder = async (e) => {
-        e.preventDefault();
-        const { data } = await axios.post(`/folder/create`, { folderName: name }, {
+
+    const handleDelete = async(id) => {
+        const { data } = await axios.delete(`/folder/delete/${id}`)
+        setStateChange(prev=>!prev)
+    }
+
+    const handleAdd = async (parentId, depthLevel) => {
+        const { data } = await axios.post(`/folder/create`, { parentId, folderName: 'Test', depthLevel }, {
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-        console.log(data)
+        setStateChange(prev=>!prev)
     }
-
+    const fetchFolders = async () => {
+        const { data } = await axios.get(`/folder/read`)
+        setFolders(data?.folderList)
+    }
     useEffect(() => {
-        const fetchFolders = async () => {
-            const { data } = await axios.get(`/folder/read`)
-            setFolders(data)
-        }
         fetchFolders()
-    }, [])
+    }, [stateChange])
     return (
         <Wrapper className="page-100">
             <h2>Create Folder</h2>
-            <Folders/>
+            <Folders folders={folders} handleAdd={handleAdd} handleDelete={handleDelete} />
             {/* <form onSubmit={createFolder}>
                 <input type="text" name='name'
                     value={name}

@@ -1,29 +1,32 @@
 import { useState } from "react";
 import Dropdown from "./Dropdown";
 
-const MenuItems = ({ items, depthLevel }) => {
+const MenuItems = ({ items, depthLevel,handleAdd,handleDelete }) => {
     const [dropdown, setDropdown] = useState(false);
-    
+
     return (
         <li className="menu-items">
-            {items.submenu ? (
+            {items.subitems ? (
                 <>
                     <button type="button"
                         aria-haspopup="menu"
                         aria-expanded={dropdown ? "true" : "false"}
                         onClick={() => setDropdown((prev) => !prev)}
                     >
-                        {items.title}{' '}
+                        {items.folderName}
                         {depthLevel > 0 ? <span>&raquo;</span> : <span className="arrow" />}
-                    </button>
-                    <Dropdown submenus={items.submenu}
+                    </button>{items.folderName !== 'Root' && <span onClick={()=>handleDelete(items._id)}>x</span>} <span onClick={()=>handleAdd(items._id,depthLevel)}>New</span>
+                    <Dropdown submenus={items.subitems}
                         dropdown={dropdown}
                         depthLevel={depthLevel}
-
+                        handleAdd={handleAdd} 
+                        handleDelete={handleDelete}
                     />
                 </>
             ) : (
-                <a href={items.url}>{items.title}</a>
+                <>
+                    <button>{items.folderName}</button><span onClick={()=>handleDelete(items._id)}>x</span> <span onClick={()=>handleAdd(items._id,depthLevel)}>New</span>
+                </>
             )}
         </li>
     );
