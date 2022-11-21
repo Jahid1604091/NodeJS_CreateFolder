@@ -3,7 +3,7 @@ import Dropdown from "./Dropdown";
 
 const MenuItems = ({ items, depthLevel,handleAdd,handleDelete }) => {
     const [dropdown, setDropdown] = useState(false);
-
+    
     return (
         <li className="menu-items">
             {items.subitems ? (
@@ -14,7 +14,7 @@ const MenuItems = ({ items, depthLevel,handleAdd,handleDelete }) => {
                         onClick={() => setDropdown((prev) => !prev)}
                     >
                         {items.folderName}
-                        {depthLevel > 0 ? <span>&raquo;</span> : <span className="arrow" />}
+                        {depthLevel > 0 && items.subitems.length>0 ? <span>&raquo;</span> : ''}
                     </button>{items.folderName !== 'Root' && <span onClick={()=>handleDelete(items._id)}>x</span>} <span onClick={()=>handleAdd(items._id,depthLevel)}>New</span>
                     <Dropdown submenus={items.subitems}
                         dropdown={dropdown}

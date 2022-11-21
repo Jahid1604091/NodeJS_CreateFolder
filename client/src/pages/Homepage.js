@@ -9,36 +9,54 @@ const Homepage = () => {
     const [stateChange, setStateChange] = useState(false);
 
 
-    const handleDelete = async(id) => {
-        const { data } = await axios.delete(`/folder/delete/${id}`)
-        setStateChange(prev=>!prev)
+    const handleDelete = async (id) => {
+        try {
+            const { data } = await axios.delete(`/folder/delete/${id}`)
+            setStateChange(prev => !prev)
+            alert(data.message)
+        } catch (error) {
+            alert(error.response.data.message)
+        }
+    }
+    const createFolder = async (folderName, parentId, depthLevel) => {
+        try {
+            const { data } = await axios.post(`/folder/create`, { parentId, folderName, depthLevel }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+          
+            alert(data.message)
+          
+        } catch (error) {
+            alert(error.response.data.message)
+        }
     }
 
     const handleAdd = async (parentId, depthLevel) => {
-        const { data } = await axios.post(`/folder/create`, { parentId, folderName: 'Test', depthLevel }, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        setStateChange(prev=>!prev)
+        let folderName = await prompt("Enter Folder Name", "New Folder");
+        await createFolder(folderName, parentId, depthLevel)
+        setStateChange(prev => !prev)
     }
+
     const fetchFolders = async () => {
-        const { data } = await axios.get(`/folder/read`)
-        setFolders(data?.folderList)
+        try {
+            const { data } = await axios.get(`/folder/read`)
+            setFolders(data?.folderList)
+          
+        } catch (error) {
+            
+        }
     }
+
     useEffect(() => {
         fetchFolders()
     }, [stateChange])
+
     return (
         <Wrapper className="page-100">
             <h2>Create Folder</h2>
             <Folders folders={folders} handleAdd={handleAdd} handleDelete={handleDelete} />
-            {/* <form onSubmit={createFolder}>
-                <input type="text" name='name'
-                    value={name}
-                    onChange={e => setName(e.target.value)} />
-                <input type="submit" value='Create' />
-            </form> */}
         </Wrapper>
     )
 }

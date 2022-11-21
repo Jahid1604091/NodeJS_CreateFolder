@@ -6,18 +6,28 @@ const router = express.Router();
 
 router.delete('/delete/:id', async (req, res) => {
 
-    var dir = './tmp';
+    var dir = './root';
 
     try {
-        const folder = await FolderModel.findByIdAndRemove(req.params.id);
-        // const folders = fs.readdirSync(dir);
+        const folder = await FolderModel.findById(req.params.id);
 
         if (!folder) {
             res.status(201).json({ message: 'No Folder' })
         }
         else {
-           
-            return res.status(200).json({ message: 'Folder Deleted' })
+            //check if it has subitems
+            const subitems = await FolderModel.find({ parentId: req.params.id })
+            // if (subitems.length > 0) {
+            //     await FolderModel.deleteMany({ parentId: req.params.id })
+            // }
+            const folders = fs.readdirSync(`${dir}/${folder.folderName}`);
+            console.log(folders)
+            // const isExist = folders.includes(req.body.folderName.trim())
+            // if (fs.existsSync(dir) || isExist) {
+            //     fs.mkdirSync(dir + '/' + req.body.folderName.trim())
+            // }
+            // await folder.remove();
+            return res.status(200).json({message:'Folder Deleted'})
         }
     } catch (err) {
         console.error(err);

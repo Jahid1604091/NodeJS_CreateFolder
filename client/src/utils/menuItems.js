@@ -1,37 +1,37 @@
 export const menuItems = [
 
     {
-      title: 'Root',
+      folderName: 'Root',
       url: '/',
       id:1,
-      submenu: [
+      subitems: [
         {
           id:11,
-          title: 'web design',
+          folderName: 'web design',
           url: 'web-design',
         },
         {
           id:12,
-          title: 'web development',
+          folderName: 'web development',
           url: 'web-dev',
-          submenu: [
+          subitems: [
             {
               id:21,
-              title: 'Frontend',
+              folderName: 'Frontend',
               url: 'frontend',
             },
             {
               id:22,
-              title: 'Backend',
-              submenu: [
+              folderName: 'Backend',
+              subitems: [
                 {
                   id:31,
-                  title: 'NodeJS',
+                  folderName: 'NodeJS',
                   url: 'node',
                 },
                 {
                   id:33,
-                  title: 'PHP',
+                  folderName: 'PHP',
                   url: 'php',
                 },
               ],
@@ -40,7 +40,7 @@ export const menuItems = [
         },
         {
           id:222,
-          title: 'SEO',
+          folderName: 'SEO',
           url: 'seo',
         },
       ],
