@@ -3,7 +3,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homepage from './pages/Homepage';
 import Error from './pages/Error';
-import Footer from './components/Footer';
 import './App.css';
 function App() {
 
@@ -15,7 +14,6 @@ function App() {
           <Route path='*' element={<Error />} />
         </Routes>
         <ToastContainer />
-        {/* <Footer /> */}
       </BrowserRouter>
 
     

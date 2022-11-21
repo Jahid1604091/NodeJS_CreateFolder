@@ -25,9 +25,9 @@ const Homepage = () => {
                     'Content-Type': 'application/json'
                 }
             })
-          
+
             alert(data.message)
-          
+
         } catch (error) {
             alert(error.response.data.message)
         }
@@ -43,9 +43,9 @@ const Homepage = () => {
         try {
             const { data } = await axios.get(`/folder/read`)
             setFolders(data?.folderList)
-          
+
         } catch (error) {
-            
+
         }
     }
 
@@ -55,8 +55,12 @@ const Homepage = () => {
 
     return (
         <Wrapper className="page-100">
-            <h2>Create Folder</h2>
-            <Folders folders={folders} handleAdd={handleAdd} handleDelete={handleDelete} />
+            <div className="section">
+                <div className="section-center">
+                    <h4>Create Folder</h4>
+                    <Folders folders={folders} handleAdd={handleAdd} handleDelete={handleDelete} />
+                </div>
+            </div>
         </Wrapper>
     )
 }
