@@ -15,7 +15,7 @@ const MenuItems = ({ items, depthLevel,handleAdd,handleDelete }) => {
                     >
                         {items.folderName}
                         {depthLevel > 0 && items.subitems.length>0 ? <span>&raquo;</span> : ''}
-                    </button>{items.folderName !== 'Root' && <span onClick={()=>handleDelete(items._id)}>x</span>} <span onClick={()=>handleAdd(items._id,depthLevel)}>New</span>
+                    </button>{items.folderName !== 'root' && <span onClick={()=>handleDelete(items._id)}>x</span>} <span onClick={()=>handleAdd(items._id,depthLevel)}>New</span>
                     <Dropdown submenus={items.subitems}
                         dropdown={dropdown}
                         depthLevel={depthLevel}
