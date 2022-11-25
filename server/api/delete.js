@@ -4,7 +4,7 @@ const FolderModel = require('../FolderModel');
 const createPath = require('../utils/createPath');
 const router = express.Router();
 
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const folder = await FolderModel.findById(req.params.id);
 

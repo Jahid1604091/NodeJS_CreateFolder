@@ -27,7 +27,7 @@ function createFolder(folders, parentId = null) {
     return folderList;
 }
 
-router.get('/read', async (req, res) => {
+router.get('/', async (req, res) => {
 
     
     try {

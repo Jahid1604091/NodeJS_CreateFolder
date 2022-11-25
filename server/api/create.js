@@ -4,7 +4,7 @@ const FolderModel = require('../FolderModel');
 const createPath = require('../utils/createPath');
 const router = express.Router();
 
-router.post('/create', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
 
         const isExist = await FolderModel.find({
