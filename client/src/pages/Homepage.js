@@ -11,7 +11,7 @@ const Homepage = () => {
 
     const handleDelete = async (id) => {
         try {
-            const { data } = await axios.delete(`/api/folder/delete/${id}`)
+            const { data } = await axios.delete(`${url}/api/folder/delete/${id}`)
             setStateChange(prev => !prev)
             alert(data.message)
         } catch (error) {
@@ -20,7 +20,7 @@ const Homepage = () => {
     }
     const createFolder = async (folderName, parentId, depthLevel) => {
         try {
-            const { data } = await axios.post(`/api/folder/create`, { parentId, folderName, depthLevel }, {
+            const { data } = await axios.post(`${url}/api/folder/create`, { parentId, folderName, depthLevel }, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -41,7 +41,7 @@ const Homepage = () => {
 
     const fetchFolders = async () => {
         try {
-            const { data } = await axios.get(`/api/folder/read`)
+            const { data } = await axios.get(`${url}/api/folder/read`)
             setFolders(data?.folderList)
 
         } catch (error) {
